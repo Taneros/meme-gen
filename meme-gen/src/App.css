@@ -57,3 +57,10 @@ main {
   border: none;
   cursor: pointer;
 }
+
+.form--image {
+  grid-column: 1 / -1;
+  display: inline-block;
+  margin: 0 auto;
+  height: 75%;
+}
