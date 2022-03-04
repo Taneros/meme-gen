@@ -3,6 +3,7 @@ import { memesData } from "../memesData";
 
 export const Meme = function (params) {
   const memesDataLength = memesData.data.memes.length;
+
   const [meme, setMeme] = useState({
     topText: "",
     bottomText: "",
@@ -22,26 +23,44 @@ export const Meme = function (params) {
   };
 
   const handleInput = function (e) {
-    const text = e.value;
+    const { name, value } = e.target;
 
     setMeme((prevMeme) => ({
       ...prevMeme,
-      topText: text,
-      bottomText: "",
+      [name]: value,
     }));
-
-    console.log(`meme`, meme);
   };
+
+  console.log(`meme`, meme);
 
   return (
     <main>
       <div className="form">
-        <input type="text" placeholder="Top Text" className="form--input" />
-        <input type="text" placeholder="Bottom Text" className="form--input" />
+        <input
+          type="text"
+          placeholder="Top Text"
+          className="form--input"
+          name="topText"
+          value={meme.topText}
+          onChange={handleInput}
+        />
+        <input
+          type="text"
+          placeholder="Bottom Text"
+          className="form--input"
+          name="bottomText"
+          value={meme.bottomText}
+          onChange={handleInput}
+        />
+
         <button className="form--button" onClick={getRandomMeme}>
           Get a new meme image
         </button>
-        <img src={meme.randomImage} alt={meme.imgTxt} className="form--image" />
+      </div>
+      <div className="meme">
+        <img src={meme.randomImage} alt={meme.imgTxt} className="meme--image" />
+        <h2 className="meme--text top">{meme.topText}</h2>
+        <h2 className="meme--text bottom">{meme.bottomText}</h2>
       </div>
     </main>
   );
